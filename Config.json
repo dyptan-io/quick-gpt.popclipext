@@ -17,12 +17,18 @@
       "description": "Generate an API key at https://platform.openai.com/account/api-keys"
     },
     {
+      "identifier": "baseUrl",
+      "label": "Base URL",
+      "type": "string",
+      "defaultValue": "https://api.openai.com/v1/",
+      "description": "Base URL for OpenAI compatible API service"
+    },
+    {
       "identifier": "model",
       "label": "Model",
-      "type": "multiple",
+      "type": "string",
       "defaultValue": "gpt-4o",
-      "description": "Specify the OpenAI model to use",
-      "values": ["gpt-4o", "gpt-4-turbo", "gpt-4", "gpt-4o-mini"]
+      "description": "Specify the LLM to use"
     }
   ]
 }

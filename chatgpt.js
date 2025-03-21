@@ -13,12 +13,17 @@
 //   type: string,
 //   description: "Generate an API key at https://platform.openai.com/account/api-keys"
 // },{
+//   identifier: baseUrl,
+//   label: Base URL,
+//   type: string,
+//   defaultValue: "https://api.openai.com/v1/",
+//   description: "Base URL for OpenAI compatible API service"
+// },{
 //   identifier: model,
 //   label: Model,
-//   type: multiple,
-//   defaultValue: "gpt-4o",
-//   description: "Specify the OpenAI model to use",
-//   values: [gpt-4o, gpt-4-turbo, gpt-4, gpt-4o-mini]
+//   type: string,
+//   defaultValue: "gpt-4o-mini",
+//   description: "Specify the LLM to use"
 // }]
 
 
@@ -28,7 +33,7 @@ const axios = require("axios");
 
 async function callOpenAI(input, promptText, options) {
   const openai = axios.create({
-    baseURL: "https://api.openai.com/v1/",
+    baseURL: options.baseUrl || "https://api.openai.com/v1/",
     headers: { Authorization: `Bearer ${options.apikey}` },
   });
 
@@ -36,7 +41,7 @@ async function callOpenAI(input, promptText, options) {
   const messages = [{ role: "user", content }];
 
   const { data } = await openai.post("chat/completions", {
-    model: options.model || "gpt-3.5-turbo",
+    model: options.model || "gpt-4o-mini",
     messages,
   });
 
@@ -55,23 +60,23 @@ async function callOpenAI(input, promptText, options) {
 exports.actions = [
   {
     title: "Check grammar",
-    code: async (i, o) => await callOpenAI(i, "Correct the grammar, do not provide any comments, notes or errors: \n\n", o),
+    code: async (i, o) => await callOpenAI(i, "Return only the grammar-corrected text without any explanations, notes, or additional content: \n\n", o),
     icon: "symbol:checkmark.seal",
   },
   {
     title: "Professional tone",
-    code:  async (i, o) => await callOpenAI(i, "Correct the grammar, and polish sentense: \n\n", o),
+    code: async (i, o) => await callOpenAI(i, "Transform this text into a professional tone. Return only the revised text without any explanations or comments: \n\n", o),
     icon: "symbol:brain.filled.head.profile",
   },
   {
     title: "Friendly tone",
-    code: async (i, o) => await callOpenAI(i, "Rewrite this using a friendly tone: \n\n", o),
+    code: async (i, o) => await callOpenAI(i, "Rewrite this using a friendly, conversational tone. Return only the revised text without any explanations or comments: \n\n", o),
     icon: "symbol:face.smiling",
   },
   {
     title: "Refactor Code",
     requiredApps: ["com.microsoft.VSCode", "com.jetbrains.goland"],
-    code: async (i, o) => await callOpenAI(i, "Refactor the following code, and provide only code, do not explain it: \n\n", o),
+    code: async (i, o) => await callOpenAI(i, "Refactor the following code for improved readability and efficiency. Return only the refactored code without comments, explanations, or markdown formatting: \n\n", o),
     icon: "symbol:apple.terminal",
   }
 ];

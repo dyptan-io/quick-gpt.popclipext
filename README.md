@@ -1,6 +1,6 @@
 # QuickGPT for PopClip
 
-QuickGPT is an extension for PopClip that integrates OpenAI's powerful language models directly into your MacOS experience. With QuickGPT, you can quickly perform tasks like grammar checking, rewriting text with different tones, summarizing, and even code refactoring, all with the convenience of PopClip.
+QuickGPT is an extension for PopClip that integrates powerful language models directly into your MacOS experience. With QuickGPT, you can quickly perform tasks like grammar checking, rewriting text with different tones, summarizing, and even code refactoring, all with the convenience of PopClip.
 
 ## Features
 
@@ -11,17 +11,22 @@ QuickGPT is an extension for PopClip that integrates OpenAI's powerful language 
 
 ## Installation
 
-1. **Install PopClip**: Ensure that PopClip is installed on your MacOS. You can download it from the [Mac App Store](https://apps.apple.com/app/popclip/id445189367).
+1. **Install PopClip**: Ensure that PopClip is installed on your MacOS. You can download it from the [Mac App Store](https://apps.apple.com/app/popclip/id445189367), or using brew formulae:
 
-2. **Get API Key**: Generate an API key from [OpenAI's API Key platform](https://platform.openai.com/account/api-keys).
+   ```sh
+   brew install --cask popclip
+   ```
+
+2. **Get API Key**: Generate an API key from [OpenAI's API Key platform](https://platform.openai.com/account/api-keys) or other compatible provider.
 
 3. **Download QuickGPT Extension**: Download zip or clone the QuickGPT extension files for PopClip from this repository.
 
 4. **Install the Extension**: Double-click on the downloaded extension file to install it in PopClip.
 
 5. **Configure Settings**:
-   - Enter the API Key you obtained from OpenAI.
-   - Choose the OpenAI model you prefer to use (default is "gpt-3.5-turbo").
+   - Enter the API Key you obtained from OpenAI-compatible provider.
+   - Configure the Base URL if you're using a custom OpenAI-compatible service.
+   - Choose the OpenAI model you prefer to use (default is "gpt-4o-mini").
 
 ## Usage
 
@@ -29,8 +34,15 @@ After installation, simply select any text in any application, and the QuickGPT 
 
 ## Customization
 
-You can customize the behavior of QuickGPT through the following options:
+You can customize the behavior of QuickGPT through the following code adjustments:
 
-- **Model**: Choose between "gpt-4" and "gpt-3.5-turbo" models for different levels of complexity and response styles.
+- **Prompt**: Edit or add the prompts in the snippet to suit your needs.
 
-- **Prompt**: Edit the prompts in the snippet to suit your needs.
+   ```javascript
+   {
+      title: "Refactor Code",
+      requiredApps: ["com.microsoft.VSCode", "com.jetbrains.goland"],
+      code: async (i, o) => await callOpenAI(i, "Refactor the following code, and provide only code, do not explain it: \n\n", o),
+      icon: "symbol:apple.terminal",
+   }
+   ```
