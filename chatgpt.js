@@ -8,22 +8,21 @@
 // requirements: [text, paste]
 // excluded apps: [com.apple.Terminal]
 // options: [{
-//   identifier: apikey,
-//   label: API Key,
-//   type: string,
-//   description: "Generate an API key at https://platform.openai.com/account/api-keys"
-// },{
 //   identifier: baseUrl,
 //   label: Base URL,
 //   type: string,
 //   defaultValue: "https://api.openai.com/v1/",
-//   description: "Base URL for OpenAI compatible API service"
+//   description: "OpenAI compatible API provider"
 // },{
 //   identifier: model,
 //   label: Model,
 //   type: string,
 //   defaultValue: "gpt-4o-mini",
 //   description: "Specify the LLM to use"
+// },{
+//   identifier: apikey,
+//   label: API Key,
+//   type: secret
 // }]
 
 
